@@ -11,4 +11,4 @@ The unit tests can be run by executing
 
     lua run_tests.lua
 
-This scripts needs the modules [lua-penlight](https://github.com/stevedonovan/Penlight) and [lua-unit](https://github.com/bluebird75/luaunit) in order to run successfully.
+Thereby the modules [lua-penlight](https://github.com/stevedonovan/Penlight) and [lua-unit](https://github.com/bluebird75/luaunit) are needed for running the unit tests.
