@@ -12,8 +12,11 @@ before_install:
   - source .travis/setenv_lua.sh
   - luarocks install luaunit
   - luarocks install penlight
+  - luarocks install luacov-coveralls
 
-script: lua run_tests.lua
+script: lua  -lluacov run_tests.lua
+
+after_success: luacov-coveralls
 
 notifications:
   email:
