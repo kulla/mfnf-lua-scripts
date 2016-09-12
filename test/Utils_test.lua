@@ -15,4 +15,16 @@ function TestUtils:test_starts()
   luaunit.assertFalse(utils.starts("aa", "aaa"))
 end
 
+function TestUtils:test_ends()
+  luaunit.assertTrue(utils.ends("aab", "b"))
+  luaunit.assertTrue(utils.ends("aab", "ab"))
+  luaunit.assertTrue(utils.ends("aaa", ""))
+  luaunit.assertTrue(utils.ends("", ""))
+
+  luaunit.assertFalse(utils.ends("aab", "a"))
+  luaunit.assertFalse(utils.ends("aaa", "ab"))
+  luaunit.assertFalse(utils.ends("", "a"))
+  luaunit.assertFalse(utils.ends("aa", "aaa"))
+end
+
 return TestUtils
