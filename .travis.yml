@@ -1,0 +1,21 @@
+language: c
+
+sudo: false
+
+env:
+  global:
+    - LUAROCKS=2.3.0
+  matrix:
+    - LUA=lua5.2
+
+before_install:
+  - source .travis/setenv_lua.sh
+  - luarocks install luaunit
+  - luarocks install penlight
+
+script: lua run_tests.lua
+
+notifications:
+  email:
+    on_success: change
+    on_failure: always

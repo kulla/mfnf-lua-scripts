@@ -7,7 +7,7 @@ local luaunit = require("luaunit")
 package.path = package.path .. ';src/?.lua'
 
 -- Add all .*test.lua files to the test suite.
-for test_file, mode in dir.dirtree(".") do
+for test_file, mode in dir.dirtree("test") do
   if not mode and test_file:match(".*test%.lua$") then
     local test_module = string.gsub(test_file, "%.lua$", "")
     local test_name = "Test_" .. string.gsub(path.basename(test_file),
