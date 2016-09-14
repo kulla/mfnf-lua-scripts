@@ -14,14 +14,13 @@ function TestNode:test_new()
   luaunit.assertNotNil(root)
 
   luaunit.assertNil(root.parent)
-
-  luaunit.assertItemsEquals(root.children, {})
 end
 
 function TestNode:test_add()
   luaunit.assertIs(node_1.parent, root)
   luaunit.assertIs(node_2.parent, root)
   luaunit.assertIs(node_3.parent, node_2)
+  luaunit.assertItemsEquals(root.children, {node_1, node_2})
 
   luaunit.assertEquals(#root.children, 2)
   luaunit.assertEquals(#node_2.children, 1)
