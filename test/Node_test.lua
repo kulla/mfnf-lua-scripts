@@ -28,4 +28,11 @@ function TestNode:test_last_child()
   luaunit.assertFalse(node_3:last_child())
 end
 
+function TestNode:test_level()
+  luaunit.assertTrue(root:level() == 0)
+  luaunit.assertTrue(node_1:level() == 1)
+  luaunit.assertTrue(node_2:level() == 1)
+  luaunit.assertTrue(node_3:level() == 2)
+end
+
 return TestNode

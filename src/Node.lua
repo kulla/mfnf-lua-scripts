@@ -15,4 +15,8 @@ function node:last_child()
   return self.children[#self.children]
 end
 
+function node:level()
+  return (self.parent and self.parent:level() + 1) or 0
+end
+
 return node
