@@ -11,4 +11,8 @@ function node:add_child(child)
   child.index  = #self.children
 end
 
+function node:last_child()
+  return self.children[#self.children]
+end
+
 return node

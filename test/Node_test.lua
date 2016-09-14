@@ -20,4 +20,12 @@ function TestNode:test_add()
   luaunit.assertTrue(#root.children == 2 and #node_2.children == 1)
 end
 
+function TestNode:test_last_child()
+  luaunit.assertTrue(root:last_child() == node_2)
+  luaunit.assertTrue(node_2:last_child() == node_3)
+
+  luaunit.assertFalse(node_1:last_child())
+  luaunit.assertFalse(node_3:last_child())
+end
+
 return TestNode
