@@ -8,7 +8,6 @@ end
 function Node:add_child(child)
   self.children[#self.children + 1] = child
   child.parent = self
-  child.index  = #self.children
 end
 
 function Node:last_child()
