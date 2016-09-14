@@ -30,8 +30,8 @@ function TestNode:test_last_child()
   luaunit.assertIs(root:last_child(), node_2)
   luaunit.assertIs(node_2:last_child(), node_3)
 
-  luaunit.assertFalse(node_1:last_child())
-  luaunit.assertFalse(node_3:last_child())
+  luaunit.assertNil(node_1:last_child())
+  luaunit.assertNil(node_3:last_child())
 end
 
 function TestNode:test_level()
