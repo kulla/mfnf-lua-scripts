@@ -36,4 +36,15 @@ function TestNode:test_level()
   luaunit.assertTrue(node_3:level() == 2)
 end
 
+function TestNode:test_find()
+  luaunit.assertTrue(root:find(function(node) return node == node_3 end) == node_3)
+  luaunit.assertTrue(root:find(function(node) return node:level() == 1 end) ~= node_2)
+  luaunit.assertTrue(root:find(function(node) return node.parent ~= nil end) == node_1)
+
+  luaunit.assertNil(root:find(function(node) return node:level() > 2 end))
+  luaunit.assertNil(node_2:find(function(node) return node == root end))
+
+  luaunit.assertNotNil(root:find(function(node) return #node.children > 1 end))
+end
+
 return TestNode
