@@ -1,16 +1,17 @@
 luaunit = require("luaunit")
-node = require("Node")
+Node = require("Node")
 
 local TestNode = {}
 
-local root, node_1, node_2, node_3 = node:new(), node:new(), node:new(), node:new()
+local root, node_1, node_2, node_3 = Node:new(), Node:new(), Node:new(), Node:new()
 root:add_child(node_1)
 root:add_child(node_2)
 node_2:add_child(node_3)
 
 function TestNode:test_new()
-  luaunit.assertTrue(root)
-  luaunit.assertFalse(root.parent)
+  luaunit.assertTrue(getmetatable(root) == Node)
+  luaunit.assertNotNil(root)
+  luaunit.assertNil(root.parent)
 end
 
 function TestNode:test_add()

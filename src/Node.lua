@@ -1,22 +1,22 @@
-local node = {}
-node.__index = node
+local Node = {}
+Node.__index = Node
 
-function node:new()
-  return setmetatable({parent = nil, children = {}}, node)
+function Node:new()
+  return setmetatable({parent = nil, children = {}}, Node)
 end
 
-function node:add_child(child)
+function Node:add_child(child)
   self.children[#self.children + 1] = child
   child.parent = self
   child.index  = #self.children
 end
 
-function node:last_child()
+function Node:last_child()
   return self.children[#self.children]
 end
 
-function node:level()
+function Node:level()
   return (self.parent and self.parent:level() + 1) or 0
 end
 
-return node
+return Node
