@@ -21,7 +21,8 @@ end
 
 function TestNode:test_add()
   luaunit.assertNil(self.root.parent)
-
+  luaunit.assertIs(self.node1.parent, self.root)
+  luaunit.assertIs(self.node2.parent, self.root)
   luaunit.assertIs(self.node3.parent, self.node2)
 
   luaunit.assertEquals(self.root.children, {self.node1, self.node2})
