@@ -27,4 +27,10 @@ function Node:find(predicate_fn)
   return nil
 end
 
+function Node:find_parent(predicate_fn)
+  if predicate_fn(self) then return self end
+  if self.parent then return self.parent:find_parent(predicate_fn) end
+  return nil
+end
+
 return Node

@@ -62,4 +62,13 @@ function TestNode:test_find()
   luaunit.assertNotNil(self.root:find(function(node) return #node.children > 1 end))
 end
 
+function TestNode:test_find_parent()
+  luaunit.assertIs(self.node3:find_parent(function(node) return node:level() == 0 end), self.root)
+  luaunit.assertIs(self.node1:find_parent(function(node) return node == self.root end), self.root)
+  luaunit.assertIs(self.node3:find_parent(function(node) return node:level() <= 1 end), self.node2)
+
+  luaunit.assertNil(self.node3:find_parent(function(node) return node == self.node1 end))
+  luaunit.assertNil(self.node3:find(function(node) return node:level() < 0 end))
+end
+
 return TestNode
