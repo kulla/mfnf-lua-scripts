@@ -18,7 +18,7 @@ function TestNode:test_new()
 
   luaunit.assertNil(self.root.parent)
 
-  luaunit.assertItemsEquals(root.children, {})
+  luaunit.assertEquals(root.children, {})
 end
 
 function TestNode:test_add()
@@ -26,10 +26,10 @@ function TestNode:test_add()
 
   luaunit.assertIs(self.node3.parent, self.node2)
 
-  luaunit.assertItemsEquals(self.root.children, {self.node1, self.node2})
-  luaunit.assertItemsEquals(self.node1.children, {})
-  luaunit.assertItemsEquals(self.node2.children, { self.node3 })
-  luaunit.assertItemsEquals(self.node3.children, {})
+  luaunit.assertEquals(self.root.children, {self.node1, self.node2})
+  luaunit.assertEquals(self.node1.children, {})
+  luaunit.assertEquals(self.node2.children, { self.node3 })
+  luaunit.assertEquals(self.node3.children, {})
 
   luaunit.assertEquals(#self.root.children, 2)
   luaunit.assertEquals(#self.node2.children, 1)
