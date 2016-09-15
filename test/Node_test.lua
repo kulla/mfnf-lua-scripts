@@ -12,12 +12,10 @@ end
 
 function TestNode:test_new()
   local root = Node:new()
-  luaunit.assertIs(getmetatable(self.root), Node)
 
-  luaunit.assertNotNil(self.root)
-
-  luaunit.assertNil(self.root.parent)
-
+  luaunit.assertIs(getmetatable(root), Node)
+  luaunit.assertNotNil(root)
+  luaunit.assertNil(root.parent)
   luaunit.assertEquals(root.children, {})
 end
 
