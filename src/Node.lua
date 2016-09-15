@@ -20,10 +20,12 @@ end
 
 function Node:find(predicate_fn)
   if predicate_fn(self) then return self end
+
   for _, child in ipairs(self.children) do
     result = child:find(predicate_fn)
     if result then return result end
   end
+
   return nil
 end
 
