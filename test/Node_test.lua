@@ -3,54 +3,63 @@ Node = require("Node")
 
 local TestNode = {}
 
-local root, node_1, node_2, node_3 = Node:new(), Node:new(), Node:new(), Node:new()
-root:add_child(node_1)
-root:add_child(node_2)
-node_2:add_child(node_3)
+function TestNode:setUp()
+  self.root, self.node1, self.node2, self.node3 = Node:new(), Node:new(), Node:new(), Node:new()
+  self.root:add_child(self.node1)
+  self.root:add_child(self.node2)
+  self.node2:add_child(self.node3)
+end
 
 function TestNode:test_new()
-  luaunit.assertIs(getmetatable(root), Node)
+  local root = Node:new()
+  luaunit.assertIs(getmetatable(self.root), Node)
 
-  luaunit.assertNotNil(root)
+  luaunit.assertNotNil(self.root)
 
-  luaunit.assertNil(root.parent)
+  luaunit.assertNil(self.root.parent)
+
+  luaunit.assertItemsEquals(root.children, {})
 end
 
 function TestNode:test_add()
-  luaunit.assertIs(node_1.parent, root)
-  luaunit.assertIs(node_2.parent, root)
-  luaunit.assertIs(node_3.parent, node_2)
-  luaunit.assertItemsEquals(root.children, {node_1, node_2})
+  luaunit.assertNil(self.root.parent)
 
-  luaunit.assertEquals(#root.children, 2)
-  luaunit.assertEquals(#node_2.children, 1)
+  luaunit.assertIs(self.node3.parent, self.node2)
+
+  luaunit.assertItemsEquals(self.root.children, {self.node1, self.node2})
+  luaunit.assertItemsEquals(self.node1.children, {})
+  luaunit.assertItemsEquals(self.node2.children, { self.node3 })
+  luaunit.assertItemsEquals(self.node3.children, {})
+
+  luaunit.assertEquals(#self.root.children, 2)
+  luaunit.assertEquals(#self.node2.children, 1)
 end
 
 function TestNode:test_last_child()
-  luaunit.assertIs(root:last_child(), node_2)
-  luaunit.assertIs(node_2:last_child(), node_3)
+  luaunit.assertIs(self.root:last_child(), self.node2)
+  luaunit.assertIs(self.node2:last_child(), self.node3)
 
-  luaunit.assertNil(node_1:last_child())
-  luaunit.assertNil(node_3:last_child())
+  luaunit.assertNil(self.node1:last_child())
+  luaunit.assertNil(self.node3:last_child())
 end
 
 function TestNode:test_level()
-  luaunit.assertEquals(root:level(), 0)
-  luaunit.assertEquals(node_1:level(), 1)
-  luaunit.assertEquals(node_2:level(), 1)
-  luaunit.assertEquals(node_3:level(), 2)
+  luaunit.assertEquals(self.root:level(), 0)
+  luaunit.assertEquals(self.node1:level(), 1)
+  luaunit.assertEquals(self.node2:level(), 1)
+  luaunit.assertEquals(self.node3:level(), 2)
 end
 
 function TestNode:test_find()
-  luaunit.assertIs(root:find(function(node) return node == node_3 end), node_3)
-  luaunit.assertIs(root:find(function(node) return node.parent ~= nil end), node_1)
+  luaunit.assertIs(self.root:find(function(node) return node == self.node3 end), self.node3)
+  luaunit.assertIs(self.root:find(function(node) return node.parent ~= nil end), self.node1)
 
-  luaunit.assertNotIs(root:find(function(node) return node:level() == 1 end), node_2)
+  luaunit.assertNotIs(self.root:find(function(node) return node:level() == 1 end), self.node2)
 
-  luaunit.assertNil(root:find(function(node) return node:level() > 2 end))
-  luaunit.assertNil(node_2:find(function(node) return node == root end))
+  luaunit.assertNil(self.root:find(function(node) return node:level() > 2 end))
+  luaunit.assertNil(self.node2:find(function(node) return node == root end))
 
-  luaunit.assertNotNil(root:find(function(node) return #node.children > 1 end))
+  luaunit.assertNotNil(self.root:find(function(node) return #node.children > 1 end))
 end
 
 return TestNode
