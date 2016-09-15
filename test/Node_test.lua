@@ -29,9 +29,6 @@ function TestNode:test_add()
   luaunit.assertEquals(self.node1.children, {})
   luaunit.assertEquals(self.node2.children, { self.node3 })
   luaunit.assertEquals(self.node3.children, {})
-
-  luaunit.assertEquals(#self.root.children, 2)
-  luaunit.assertEquals(#self.node2.children, 1)
 end
 
 function TestNode:test_last_child()
