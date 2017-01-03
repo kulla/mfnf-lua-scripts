@@ -23,7 +23,7 @@ function TestNode:test_new()
   luaunit.assertEquals(root.children, {})
 end
 
-function TestNode:test_add()
+function TestNode:test_add_child()
   luaunit.assertNil(self.root.parent)
   luaunit.assertIs(self.node1.parent, self.root)
   luaunit.assertIs(self.node2.parent, self.root)
