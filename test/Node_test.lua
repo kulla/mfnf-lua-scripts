@@ -4,7 +4,11 @@ Node = require("Node")
 local TestNode = {}
 
 function TestNode:setUp()
-  self.root, self.node1, self.node2, self.node3 = Node:new(), Node:new(), Node:new(), Node:new()
+  self.root = Node:new()
+  self.node1 = Node:new()
+  self.node2 = Node:new()
+  self.node3 = Node:new()
+
   self.root:add_child(self.node1)
   self.root:add_child(self.node2)
   self.node2:add_child(self.node3)
