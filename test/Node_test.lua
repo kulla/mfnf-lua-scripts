@@ -51,6 +51,12 @@ function TestNode:test_add_child()
   luaunit.assertEquals(self.node5.children, {})
 end
 
+function TestNode:test_root()
+  luaunit.assertIs(self.root:root(), self.root)
+  luaunit.assertIs(self.node1:root(), self.root)
+  luaunit.assertIs(self.node4:root(), self.root)
+end
+
 function TestNode:test_last_child()
   luaunit.assertIs(self.root:last_child(), self.node5)
   luaunit.assertIs(self.node1:last_child(), self.node3)

@@ -10,6 +10,14 @@ function Node:add_child(child)
   child.parent = self
 end
 
+function Node:root()
+  if self.parent then
+    return self.parent:root()
+  else
+    return self
+  end
+end
+
 function Node:last_child()
   return self.children[#self.children]
 end
