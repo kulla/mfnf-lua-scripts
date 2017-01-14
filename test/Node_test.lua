@@ -69,23 +69,38 @@ function TestNode:test_level()
 end
 
 function TestNode:test_find()
-  luaunit.assertIs(self.root:find(function(node) return node == self.node3 end), self.node3)
-  luaunit.assertIs(self.root:find(function(node) return node.parent ~= nil end), self.node1)
-  luaunit.assertIs(self.root:find(function(node) return node:level() == 1 end), self.node1)
+  luaunit.assertIs(
+    self.root:find(function(node) return node == self.node3 end),
+    self.node3)
+  luaunit.assertIs(
+    self.root:find(function(node) return node.parent ~= nil end),
+    self.node1)
+  luaunit.assertIs(
+    self.root:find(function(node) return node:level() == 1 end),
+    self.node1)
 
   luaunit.assertNil(self.root:find(function(node) return node:level() > 3 end))
   luaunit.assertNil(self.node1:find(function(node) return node == root end))
 
-  luaunit.assertNotNil(self.root:find(function(node) return #node.children > 1 end))
+  luaunit.assertNotNil(self.root:find(
+    function(node) return #node.children > 1 end))
 end
 
 function TestNode:test_find_parent()
-  luaunit.assertIs(self.node3:find_parent(function(node) return node:level() == 0 end), self.root)
-  luaunit.assertIs(self.node1:find_parent(function(node) return node == self.root end), self.root)
-  luaunit.assertIs(self.node3:find_parent(function(node) return node:level() <= 1 end), self.node1)
+  luaunit.assertIs(
+    self.node3:find_parent(function(node) return node:level() == 0 end),
+    self.root)
+  luaunit.assertIs(
+    self.node1:find_parent(function(node) return node == self.root end),
+    self.root)
+  luaunit.assertIs(
+    self.node3:find_parent(function(node) return node:level() <= 1 end),
+    self.node1)
 
-  luaunit.assertNil(self.node4:find_parent(function(node) return node == self.node5 end))
-  luaunit.assertNil(self.node4:find_parent(function(node) return node:level() < 0 end))
+  luaunit.assertNil(self.node4:find_parent(
+    function(node) return node == self.node5 end))
+  luaunit.assertNil(self.node4:find_parent(
+    function(node) return node:level() < 0 end))
 end
 
 return TestNode
