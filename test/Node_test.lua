@@ -3,6 +3,12 @@ Node = require("Node")
 
 local TestNode = {}
 
+--- Sets up the following tree:
+--
+-- root
+--  |- node1
+--  |- node2
+--      |- node3
 function TestNode:setUp()
   self.root = Node:new()
   self.node1 = Node:new()
