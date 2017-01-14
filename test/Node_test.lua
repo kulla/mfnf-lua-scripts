@@ -1,4 +1,5 @@
 luaunit = require("luaunit")
+
 Node = require("Node")
 
 local TestNode = {}
@@ -72,6 +73,31 @@ function TestNode:test_level()
   luaunit.assertEquals(self.node3:level(), 2)
   luaunit.assertEquals(self.node4:level(), 3)
   luaunit.assertEquals(self.node5:level(), 1)
+end
+
+function TestNode:test_iter()
+  -- Converts an iterator function into a table
+  function to_table(iter_func)
+    local result = {}
+    local i = 1
+
+    for item in iter_func do
+      result[i] = item
+      i = i+1
+    end
+
+    return result
+  end
+
+  luaunit.assertEquals(to_table(self.node5:iter()), { self.node5 })
+
+  luaunit.assertEquals(
+    to_table(self.node1:iter()),
+    { self.node1, self.node2, self.node3, self.node4 })
+
+  luaunit.assertEquals(
+    to_table(self.root:iter()),
+    { self.root, self.node1, self.node2, self.node3, self.node4, self.node5 })
 end
 
 function TestNode:test_find()
