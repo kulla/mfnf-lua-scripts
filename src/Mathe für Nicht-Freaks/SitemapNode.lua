@@ -27,4 +27,14 @@ function SitemapNode:add_node(node)
   end
 end
 
+function SitemapNode:next_site()
+  local iter_nodes = self:root():iter()
+
+  for node in iter_nodes do
+    if node == self then
+      return iter_nodes()
+    end
+  end
+end
+
 return SitemapNode

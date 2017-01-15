@@ -68,4 +68,15 @@ function TestSitemapNode:test_add_node()
   end
 end
 
+function TestSitemapNode:test_next()
+  luaunit.assertIs(self.root:next_site(), self.node1)
+  luaunit.assertIs(self.node1:next_site(), self.node2)
+  luaunit.assertIs(self.node2:next_site(), self.node3)
+  luaunit.assertIs(self.node3:next_site(), self.node4)
+  luaunit.assertIs(self.node4:next_site(), self.node5)
+  luaunit.assertIs(self.node5:next_site(), self.node6)
+  luaunit.assertIs(self.node6:next_site(), self.node7)
+  luaunit.assertIs(self.node7:next_site(), nil)
+end
+
 return TestSitemapNode
